@@ -1,3 +1,7 @@
+.app {
+    height: 100%;
+}
+
 .gif {
     max-width: 100%;
     display: block;
@@ -40,7 +44,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 10px auto;
+    margin: 0 auto;
+    padding: 10px 0;
     max-width: 350px;
 }
 

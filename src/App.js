@@ -109,7 +109,7 @@ class App extends Component {
                 }
                 {
                     this.state.loaded && this.state.gif &&
-                    <>
+                    <div className="app">
                         <div
                             className="title"
                         >
@@ -135,7 +135,7 @@ class App extends Component {
                                 }}>Descargar</div>
                             }
                         </div>
-                    </>
+                    </div>
                 }
             </>
         );
