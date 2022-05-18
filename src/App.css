@@ -1,0 +1,58 @@
+.gif {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.buttons > div {
+    background-color: gray;
+    border: 0;
+    color: white;
+    margin: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.loading > img {
+    width: 200px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    max-width: 350px;
+}
+
+.title > img {
+    height: 239px;
+    width: 323px;
+    object-position: -6001px -1px;
+    object-fit: none;
+    margin-bottom: 10px;
+}
+
+.title > div {
+    margin-left: auto;
+    font-size: .75em;
+}
