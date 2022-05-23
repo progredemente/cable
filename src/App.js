@@ -52,15 +52,45 @@ class App extends Component {
         this.clear(context, this.state.scaleFactor);
         this.draw(3, context, this.state.scaleFactor);
         encoder.addFrame(context);
+        this.clear(context, this.state.scaleFactor);
+        this.draw(0, context, this.state.scaleFactor);
+        encoder.addFrame(context);
+        this.clear(context, this.state.scaleFactor);
+        this.draw(1, context, this.state.scaleFactor);
+        encoder.addFrame(context);
+        this.clear(context, this.state.scaleFactor);
+        this.draw(4, context, this.state.scaleFactor);
+        encoder.addFrame(context);
+        this.clear(context, this.state.scaleFactor);
+        this.draw(5, context, this.state.scaleFactor);
+        encoder.addFrame(context);
+        
         encoder.finish();
         let binaryGif = encoder.stream().getData();
         this.setState({ gif: `data:image/gif;base64,${window.btoa(binaryGif)}`})
     }
 
+    
     draw(frameNumber, context, scaleFactor) {
-        frameNumber = (frameNumber || 0) % 4;
+        frameNumber = (frameNumber || 0) % 6;
         if(this.state.crop){
-            context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, 732 * scaleFactor, 26 * scaleFactor, 598 * scaleFactor, 598 * scaleFactor);
+            if(frameNumber === 2 || frameNumber === 3){
+                context.translate((803 + 598 / 2) * scaleFactor, (40 + 598 / 2) * scaleFactor);
+                context.rotate(15 * Math.PI / 180);
+                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, -598 / 2 * scaleFactor, -598 / 2 * scaleFactor, 598 * scaleFactor, 598 * scaleFactor);
+                context.rotate(-15 * Math.PI / 180);
+                context.translate(-(803 + 598 / 2) * scaleFactor, -(40 + 598 / 2) * scaleFactor);
+            }
+            else if(frameNumber === 4 || frameNumber === 5){
+                context.translate((656 + 598 / 2) * scaleFactor, (37 + 598 / 2) * scaleFactor);
+                context.rotate(-15 * Math.PI / 180);
+                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, -598 / 2 * scaleFactor, -598 / 2 * scaleFactor, 598 * scaleFactor, 598 * scaleFactor);
+                context.rotate(15 * Math.PI / 180);
+                context.translate(-(656 + 598 / 2) * scaleFactor, -(37 + 598 / 2) * scaleFactor);
+            }
+            else {
+                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, 732 * scaleFactor, 26 * scaleFactor, 598 * scaleFactor, 598 * scaleFactor);
+            }
         }
         context.drawImage(this.img, this.side * frameNumber, 0, this.side, this.side, 0, 0, this.side * scaleFactor, this.side * scaleFactor);
         this.drawUrl(context, scaleFactor);
