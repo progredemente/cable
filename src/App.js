@@ -1,9 +1,9 @@
-import { Component, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import { Cropper } from 'react-cropper';
 import './App.css';
 import { GIFEncoder } from './GIFEncoder';
 import 'cropperjs/dist/cropper.css';
-import Icon from './Icon';
+import { Icon } from 'components/Icon';
 
 class App extends Component {
 

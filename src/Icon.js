@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import './Icon.css';
 
 class Icon extends Component{
