@@ -3,7 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
+const webpack = require('webpack');
+const path = require('path');
 
+require('dotenv').config({ path: path.join(__dirname,'../.env.development') });
 
 const devConfig = {
   mode: 'development',
@@ -17,13 +20,16 @@ const devConfig = {
     new ModuleFederationPlugin({
       name: 'cable',
       remotes: {
-        components: 'components@http://localhost:3001/remoteEntry.js'
+        components: 'components@https://progredemente.com/components/remoteEntry.js'
       },
       shared: packageJson.dependencies
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      resourcesUrl: "https://progredemente.com/resources"
+      resourcesUrl: process.env.RESOURCES_URL
+    }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
     }),
   ],
 };

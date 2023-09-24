@@ -3,7 +3,7 @@
   "name": "Recoge cable",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "https://progredemente.com/resources/cable.png",
       "type": "image/png",
       "sizes": "256x256"
     }

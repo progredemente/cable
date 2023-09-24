@@ -4,7 +4,10 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
+
+require('dotenv').config({ path: path.join(__dirname,'../.env.production') });
 
 
 const prodConfig = {
@@ -24,7 +27,10 @@ const prodConfig = {
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      resourcesUrl: "/resources"
+      resourcesUrl: process.env.RESOURCES_URL
+    }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
     }),
     new CopyWebpackPlugin({
         patterns: [

@@ -147,7 +147,7 @@ class App extends Component {
                 {
                     !this.state.loaded &&
                     <div className="loading">
-                        <img src="./favicon.png" alt="Cargando" />
+                        <img src={`${process.env.RESOURCES_URL}/cable.png`} alt="Cargando" />
                         Cargando
                     </div>
                 }
