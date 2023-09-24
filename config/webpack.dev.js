@@ -20,7 +20,7 @@ const devConfig = {
     new ModuleFederationPlugin({
       name: 'cable',
       remotes: {
-        components: 'components@https://progredemente.com/components/remoteEntry.js'
+        components: `components@${process.env.COMPONENTS_URL}/remoteEntry.js`
       },
       shared: packageJson.dependencies
     }),

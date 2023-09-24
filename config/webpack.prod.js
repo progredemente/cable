@@ -21,7 +21,7 @@ const prodConfig = {
     new ModuleFederationPlugin({
       name: 'cable',
       remotes: {
-        components: 'components@/components/remoteEntry.js'
+        components: `components@${process.env.COMPONENTS_URL}/remoteEntry.js`
       },
       shared: packageJson.dependencies
     }),
