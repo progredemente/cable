@@ -1,9 +1,9 @@
 import React, { Component, createRef } from 'react';
-import { Cropper } from 'react-cropper';
 import './App.css';
 import { GIFEncoder } from './GIFEncoder';
-import 'cropperjs/dist/cropper.css';
 import { Icon } from 'components/Icon';
+import { ImageCropperModal } from 'components/ImageCropperModal';
+
 
 class App extends Component {
 
@@ -11,15 +11,14 @@ class App extends Component {
         super(props);
         this.state = {
             loaded: false,
-            scaleFactor: .25,
             gif: null,
             face: null,
-            crop: null,
-            showModal: false
+            crop: null
         }
+        this.scaleFactor = .25;
         this.side = 1500;
         this.img = null;
-        this.cropperRef = createRef();
+        this.cropperModalRef = createRef();
     }
 
     componentDidMount(){
@@ -31,38 +30,42 @@ class App extends Component {
         }
     }
 
+    setCrop(crop) {
+        this.setState({crop}, this.create);
+    }
+
     create() {
         let encoder = new GIFEncoder();
         encoder.setRepeat(0);
         encoder.setDelay(100);
         encoder.start();
         let canvas = document.createElement('canvas');
-        canvas.width = this.side * this.state.scaleFactor;
-        canvas.height = this.side * this.state.scaleFactor;
+        canvas.width = this.side * this.scaleFactor;
+        canvas.height = this.side * this.scaleFactor;
         let context = canvas.getContext('2d');
-        this.clear(context, this.state.scaleFactor);
-        this.draw(0, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(0, context);
         encoder.addFrame(context);
-        this.clear(context, this.state.scaleFactor);
-        this.draw(1, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(1, context);
         encoder.addFrame(context);
-        this.clear(context, this.state.scaleFactor);
-        this.draw(2, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(2, context);
         encoder.addFrame(context);
-        this.clear(context, this.state.scaleFactor);
-        this.draw(3, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(3, context);
         encoder.addFrame(context);
-        this.clear(context, this.state.scaleFactor);
-        this.draw(0, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(0, context);
         encoder.addFrame(context);
-        this.clear(context, this.state.scaleFactor);
-        this.draw(1, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(1, context);
         encoder.addFrame(context);
-        this.clear(context, this.state.scaleFactor);
-        this.draw(4, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(4, context);
         encoder.addFrame(context);
-        this.clear(context, this.state.scaleFactor);
-        this.draw(5, context, this.state.scaleFactor);
+        this.clear(context);
+        this.draw(5, context);
         encoder.addFrame(context);
         
         encoder.finish();
@@ -71,41 +74,41 @@ class App extends Component {
     }
 
     
-    draw(frameNumber, context, scaleFactor) {
+    draw(frameNumber, context) {
         frameNumber = (frameNumber || 0) % 6;
         if(this.state.crop){
             if(frameNumber === 2 || frameNumber === 3){
-                context.translate((803 + 598 / 2) * scaleFactor, (40 + 598 / 2) * scaleFactor);
+                context.translate((803 + 598 / 2) * this.scaleFactor, (40 + 598 / 2) * this.scaleFactor);
                 context.rotate(15 * Math.PI / 180);
-                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, -598 / 2 * scaleFactor, -598 / 2 * scaleFactor, 598 * scaleFactor, 598 * scaleFactor);
+                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, -598 / 2 * this.scaleFactor, -598 / 2 * this.scaleFactor, 598 * this.scaleFactor, 598 * this.scaleFactor);
                 context.rotate(-15 * Math.PI / 180);
-                context.translate(-(803 + 598 / 2) * scaleFactor, -(40 + 598 / 2) * scaleFactor);
+                context.translate(-(803 + 598 / 2) * this.scaleFactor, -(40 + 598 / 2) * this.scaleFactor);
             }
             else if(frameNumber === 4 || frameNumber === 5){
-                context.translate((656 + 598 / 2) * scaleFactor, (37 + 598 / 2) * scaleFactor);
+                context.translate((656 + 598 / 2) * this.scaleFactor, (37 + 598 / 2) * this.scaleFactor);
                 context.rotate(-15 * Math.PI / 180);
-                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, -598 / 2 * scaleFactor, -598 / 2 * scaleFactor, 598 * scaleFactor, 598 * scaleFactor);
+                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, -598 / 2 * this.scaleFactor, -598 / 2 * this.scaleFactor, 598 * this.scaleFactor, 598 * this.scaleFactor);
                 context.rotate(15 * Math.PI / 180);
-                context.translate(-(656 + 598 / 2) * scaleFactor, -(37 + 598 / 2) * scaleFactor);
+                context.translate(-(656 + 598 / 2) * this.scaleFactor, -(37 + 598 / 2) * this.scaleFactor);
             }
             else {
-                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, 732 * scaleFactor, 26 * scaleFactor, 598 * scaleFactor, 598 * scaleFactor);
+                context.drawImage(this.state.crop, 0, 0, this.state.crop.width, this.state.crop.height, 732 * this.scaleFactor, 26 * this.scaleFactor, 598 * this.scaleFactor, 598 * this.scaleFactor);
             }
         }
-        context.drawImage(this.img, this.side * frameNumber, 0, this.side, this.side, 0, 0, this.side * scaleFactor, this.side * scaleFactor);
-        this.drawUrl(context, scaleFactor);
+        context.drawImage(this.img, this.side * frameNumber, 0, this.side, this.side, 0, 0, this.side * this.scaleFactor, this.side * this.scaleFactor);
+        this.drawUrl(context);
     }
 
-    drawUrl(context, scaleFactor) {
-        context.font = `${80 * scaleFactor}px ComicTypo`;
+    drawUrl(context) {
+        context.font = `${80 * this.scaleFactor}px ComicTypo`;
         context.textAlign = "center";
         context.fillStyle = "rgba(0, 0, 0, .5)";
-        context.fillText("recoge cable en progredemente.com/cable", this.side * scaleFactor / 2 , this.side * scaleFactor - 40 * scaleFactor);
+        context.fillText("recoge cable en progredemente.com/cable", this.side * this.scaleFactor / 2 , this.side * this.scaleFactor - 40 * this.scaleFactor);
     }
 
-    clear(context, scaleFactor) {
+    clear(context) {
         context.fillStyle = "white";
-        context.fillRect(0, 0, this.side * scaleFactor, this.side * scaleFactor)
+        context.fillRect(0, 0, this.side * this.scaleFactor, this.side * this.scaleFactor)
     }
 
     download() {
@@ -125,20 +128,14 @@ class App extends Component {
                 let face = new Image();
                 face.src = e.target.result;
                 face.onload = () => {
-                    this.setState({face, showModal: true});
+                    this.setState({face}, () => {
+                        this.cropperModalRef.current.showModal();
+                    });
                 }
             });
             fr.readAsDataURL(input.files[0]);
         }
         input.click();
-    }
-
-    hideModal = () => {
-        let crop = new Image();
-        crop.src = this.cropperRef.current.cropper.getCroppedCanvas().toDataURL();
-        crop.onload = () => {
-            this.setState({crop, showModal: false}, this.create);
-        }
     }
 
     render() {
@@ -170,7 +167,7 @@ class App extends Component {
                         />
                         <div className="buttons">
                             <div
-                                className="button"
+                                className="prg-button"
                                 onClick={() => {
                                     this.upload()
                                 }}
@@ -181,15 +178,15 @@ class App extends Component {
                                 this.state.face &&
                                 <>
                                     <div
-                                        className="button"
+                                        className="prg-button"
                                         onClick={() => {
-                                            this.setState({showModal: true});
+                                            this.cropperModalRef.current.showModal();
                                         }}
                                     >
                                         Editar&nbsp;cara&nbsp;<Icon icon="E" />
                                     </div>
                                     <div
-                                        className="button download"
+                                        className="prg-button download"
                                         onClick={() => {
                                             this.download()
                                         }}
@@ -201,35 +198,11 @@ class App extends Component {
                         </div>
                         {
                             this.state.face && 
-                            <div
-                                className={`modal${this.state.showModal ? "": " hidden"}`}
-                                onClick={this.hideModal}
-                                onMouseUp={() => {
-                                    return false;
-                                }}
-                            >
-                                <div
-                                    className="modal-container"
-                                    onClick={(evt) => {
-                                        evt.stopPropagation();
-                                    }}
-                                >
-                                    <div className="modal-title">Recortar imagen</div>
-                                    <Cropper
-                                        src={this.state.face.src}
-                                        aspectRatio={1}
-                                        style={{height: this.state.face.height * Math.min(this.state.face.width, window.innerWidth - 40) / this.state.face.width, width: Math.min(this.state.face.width, window.innerWidth - 40)}}
-                                        zoomable={false}
-                                        ref={this.cropperRef}
-                                    />
-                                    <div
-                                        className="button"
-                                        onClick={this.hideModal}
-                                    >
-                                        Aceptar
-                                    </div>
-                                </div>
-                            </div>
+                            <ImageCropperModal
+                                setCrop={(crop) => this.setCrop(crop)}
+                                face={this.state.face}
+                                ref={this.cropperModalRef}
+                            />
                         }
                     </div>
                 }

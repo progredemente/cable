@@ -18,3 +18,12 @@ a {
     text-decoration: none;
     color: var(--primary-color);
 }
+
+.prg-button {
+    --prg-button-background-color: var(--secondary-color);
+    --prg-button-text-color: black;
+}
+
+.image-cropper-modal {
+    --image-cropper-modal-background-shade-color: rgba(80, 30, 11, 0.5) !important;  
+}
