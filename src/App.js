@@ -3,6 +3,7 @@ import './App.css';
 import { GIFEncoder } from 'components/GIFEncoder';
 import { Icon } from 'components/Icon';
 import { ImageCropperModal } from 'components/ImageCropperModal';
+import { AppsBar } from 'components/AppsBar';
 
 
 class App extends Component {
@@ -140,7 +141,7 @@ class App extends Component {
 
     render() {
         return (
-            <>
+            <AppsBar current='cable'>
                 {
                     !this.state.loaded &&
                     <div className="loading">
@@ -206,7 +207,7 @@ class App extends Component {
                         }
                     </div>
                 }
-            </>
+            </AppsBar>
         );
     }
 }
