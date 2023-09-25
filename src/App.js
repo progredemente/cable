@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import './App.css';
-import { GIFEncoder } from './GIFEncoder';
+import { GIFEncoder } from 'components/GIFEncoder';
 import { Icon } from 'components/Icon';
 import { ImageCropperModal } from 'components/ImageCropperModal';
 
