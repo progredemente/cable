@@ -3,8 +3,3 @@
     --gifer-secondary-color: #f0b19b !important;
     --gifer-title-start-position: 9000px;
 }
-
-.apps-bar-container {
-    --apps-bar-primary-color: var(--gifer-primary-color) !important;
-    --apps-bar-secondary-color: var(--gifer-secondary-color) !important;
-}
