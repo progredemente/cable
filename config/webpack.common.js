@@ -19,15 +19,15 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       }
     ],
-    optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            keep_fnames: true
-          }
-        })
-      ]
-    }
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_fnames: true
+        }
+      })
+    ]
+  }
 };
