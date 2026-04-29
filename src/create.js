@@ -37,5 +37,5 @@ export function drawUrl(context, scaleFactor, side) {
     context.font = `${80 * scaleFactor}px ComicTypo`;
     context.textAlign = "center";
     context.fillStyle = "rgba(0, 0, 0, .5)";
-    context.fillText("recoge cable en progredemente.com/cable", side * scaleFactor / 2 , side * scaleFactor - 40 * scaleFactor);
+    context.fillText("recoge cable en cable.progredemente.com", side * scaleFactor / 2 , side * scaleFactor - 40 * scaleFactor);
 }
