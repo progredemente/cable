@@ -12,7 +12,7 @@ class App extends Component {
         return (
                 <GIFer
                     appId="cable"
-                    loadingImageUrl={`${process.env.RESOURCES_URL}/cable.png`}
+                    loadingImageUrl={`${process.env.MEDIA_URL}/resources/logos/cable.png`}
                     sourceImageUrl="./cable.png"
                     title='Recoge Cable'
                     create={create}
